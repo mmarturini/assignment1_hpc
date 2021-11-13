@@ -1,0 +1,30 @@
+#COMPILATION
+To compile the pi.c program I used the default compiler gcc; the version is: gcc (GCC) 4.8.5.
+
+To compile the mpi_pi.c program, I first loaded the openmpi/4.0.3/gnu/9.3.0 module from /opt/area/shared/modules/mpi, then I compiled it
+with the mpicc wrapper, so the version of the compiler is: gcc (GCC) 9.3.0
+
+I compiled both the pi.c and mpi_pi.c programs on the login node.
+
+
+#BASH SCRIPTS
+To compare the execution time for the pi.c and mpi_pi.c programs on 1 core I used the 1proc.sh shell script; it simply launches the two 
+programs 10 times, and collect the /usr/bin/time. I then computed the mean.
+
+To carry out the strong scalability test I used the following shell scripts:
+ - strong_10e8.sh
+ - strong_10e9.sh
+ - strong_10e10.sh
+ - strong_10e11.sh
+Given a number of moves, for instance 10^8, it launches mpi_pi.c with different number of processors (from 1 to 48) for three times, and 
+stores the output in three different files named strong10e8_out.i with i=1,2,3.
+
+To carry out the weak scalability test I used the following bash scripts:
+ - weak_10e8.sh
+ - weak_10e9.sh
+ - weak_10e10.sh
+ - weak_10e11.sh 
+In this case, given an initial number of moves, for example 10^8, the program launches mpi_pi.c with different processors (procs from 1 to 
+48) and a number of iterations given by (current_number_of_processors * initial_moves), for three different times, and stores in the output 
+in three different files called weak10e8_out.i with i=1,2,3.
+
